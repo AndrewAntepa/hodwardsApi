@@ -51,8 +51,13 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Collection<Student>> getAllStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());
+    }
+
+    @GetMapping("/ageBetween")
+    public Collection<Student> getStudentsByAgeBetween(@RequestParam int min, @RequestParam int max) {
+        return studentService.getStudentsByAgeBetween(min, max);
     }
 }
