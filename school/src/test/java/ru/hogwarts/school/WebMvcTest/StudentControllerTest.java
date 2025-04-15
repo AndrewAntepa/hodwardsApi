@@ -130,4 +130,17 @@ public class StudentControllerTest {
 
         verify(studentService).getStudentsByAgeBetween(19, 22);
     }
+
+    @Test
+    public void shouldReturnBadRequestWhenCreatingStudentWithInvalidData() throws Exception {
+        Student invalidStudent = new Student(null, "", -1);
+
+        mockMvc.perform(post("/student")
+                        .content(new ObjectMapper().writeValueAsString(invalidStudent))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+        verify(studentService, times(0)).createStudent(any(Student.class));  // Сервис не должен вызываться
+    }
 }

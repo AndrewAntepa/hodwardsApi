@@ -14,6 +14,7 @@ import ru.hogwarts.school.controller.FacultyController;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -109,6 +110,14 @@ public class FacultyControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name").value("Biology"))
                 .andExpect(jsonPath("$[0].color").value("yellow"));
+    }
+
+    @Test
+    void testGetFacultyByEmptyColor() throws Exception {
+        when(facultyService.getFacultyByColor("")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/faculty/color/"))
+                .andExpect(status().isNotFound()); // так как путь /faculty/color/ не существует
     }
 }
 
