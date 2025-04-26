@@ -1,23 +1,13 @@
 package ru.hogwarts.school.controller;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -72,4 +62,19 @@ public class StudentController {
         return studentService.getStudentsByAgeBetween(min, max);
     }
 
+
+    @GetMapping("/amount-of-students")
+    public Integer getAmountOfStudents() {
+        return studentService.getAmountOfStudents();
+    }
+
+    @GetMapping("/average-age-of-students")
+    public Integer getAverageAgeOfStudents() {
+        return studentService.getAverageAgeOfStudents();
+    }
+
+    @GetMapping("last-fave-students")
+    public List<Student> getLastFaveStudents() {
+        return studentService.getLastFiveStudents();
+    }
 }

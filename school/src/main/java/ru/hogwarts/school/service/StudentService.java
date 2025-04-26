@@ -1,14 +1,11 @@
 package ru.hogwarts.school.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
-import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositiry.StudentRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -49,5 +46,17 @@ public class StudentService {
 
     public Collection<Student> getStudentByName(String name) {
         return studentRepository.findStudentByNameIgnoreCase(name);
+    }
+
+    public Integer getAmountOfStudents() {
+        return studentRepository.getAmountOfStudents();
+    }
+
+    public Integer getAverageAgeOfStudents() {
+        return studentRepository.getAverageAgeOfStudents();
+    }
+
+    public List<Student> getLastFiveStudents(){
+        return studentRepository.getLastFiveStudents();
     }
 }
