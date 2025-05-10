@@ -1,6 +1,9 @@
 package ru.hogwarts.school.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Objects;
 
