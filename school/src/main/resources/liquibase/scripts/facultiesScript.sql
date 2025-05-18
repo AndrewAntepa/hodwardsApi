@@ -8,4 +8,4 @@ CREATE TABLE facultyLog (
 )
 
 -- changeset andrew:2
-CREATE INDEX idx_faculties_name_color ON facultyLog(name, color);
+CREATE INDEX idx_faculties_name_color ON faculty(name, color);
