@@ -1,0 +1,6 @@
+databaseChangeLog:
+    - include:
+        file: my_liquibase/scripts/studentsScript.sql
+
+    - include:
+        file: my_liquibase/scripts/facultiesScript.sql

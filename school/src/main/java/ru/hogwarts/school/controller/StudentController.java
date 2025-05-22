@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/student")
@@ -81,5 +84,15 @@ public class StudentController {
     @GetMapping("/name/{name}")
     public ResponseEntity<Collection<Student>> getStudentByName(@PathVariable String name) {
         return ResponseEntity.ok(studentService.getStudentByName(name));
+    }
+
+    @GetMapping("name/starts-A")
+    public Collection<Student> getStudentByNameStartsWithA() {
+        return studentService.getStudentByNameStartsWithA();
+    }
+
+    @GetMapping("name/avg-age")
+    public double averageAgeOfStudents() {
+        return studentService.averageAgeOfStudents();
     }
 }

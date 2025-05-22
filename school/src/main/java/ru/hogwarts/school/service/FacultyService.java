@@ -12,6 +12,7 @@ import ru.hogwarts.school.repositiry.FacultyRepository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 @Service
@@ -70,5 +71,12 @@ public class FacultyService {
         logger.info("Работает метод getFacultyByNameAndColor с именем = {} и цветом = {}",  name, color);
 
         return facultyRepository.findFacultyByNameAndColorIgnoreCase(name, color);
+    }
+
+    public String getTheLongestFaculty() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("nan");
     }
 }
