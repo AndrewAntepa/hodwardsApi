@@ -9,6 +9,7 @@ import ru.hogwarts.school.repositiry.StudentRepository;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 public class StudentService {
@@ -86,7 +87,7 @@ public class StudentService {
 
     public Collection<Student> getStudentByNameStartsWithA() {
         return studentRepository.findAll().stream()
-                .filter(s -> s.getName().startsWith("A"))
+                .filter(s -> s.getName().toUpperCase().startsWith("A"))
                 .sorted(Comparator.comparing(Student::getName)).toList();
     }
 
@@ -95,5 +96,11 @@ public class StudentService {
                 .mapToInt(Student :: getAge)
                 .average()
                 .orElse(0);
+    }
+
+
+
+    public int tryMethod() {
+        return IntStream.range(0, 1_000_000).sum();
     }
 }
