@@ -8,5 +8,3 @@
 --
 -- -- changeset andrew:2
 -- CREATE INDEX idx_students_name ON student(name);;
---
---
