@@ -103,4 +103,6 @@ public class StudentService {
     public int tryMethod() {
         return IntStream.range(0, 1_000_000).sum();
     }
+
+
 }
