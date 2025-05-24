@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import com.sun.tools.javac.Main;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -95,5 +96,45 @@ public class StudentController {
     @GetMapping("name/avg-age")
     public double averageAgeOfStudents() {
         return studentService.averageAgeOfStudents();
+    }
+
+    @GetMapping("students/print-parallel")
+    public void printParallel() {
+        List<Student> students = (List<Student>) studentService.getAllStudents();
+
+        System.out.println("1. " + students.get(0).getName());
+        System.out.println("2. " + students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println("3. " + students.get(2).getName());
+            System.out.println("4. " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + students.get(4).getName());
+            System.out.println("6. " + students.get(5).getName());
+        }).start();
+    }
+
+    @GetMapping("/students/print-synchronized")
+    public void printSynchronized() {
+        List<Student> students = (List<Student>) studentService.getAllStudents();
+
+        System.out.println("1. " + printNameOfStudent(students.get(0)));
+        System.out.println("2. " + printNameOfStudent(students.get(1)));
+
+        new Thread(() -> {
+            System.out.println("3. " + printNameOfStudent(students.get(2)));
+            System.out.println("4. " + printNameOfStudent(students.get(3)));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + printNameOfStudent(students.get(4)));
+            System.out.println("6. " + printNameOfStudent(students.get(5)));
+        }).start();
+    }
+
+    private synchronized String printNameOfStudent(Student student){
+        return student.getName();
     }
 }
